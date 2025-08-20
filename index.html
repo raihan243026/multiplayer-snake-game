@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Snake</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light gray background */
+        }
+        .snake-grid {
+            display: grid;
+            background-color: #d1d5db; /* Gray background for the grid */
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .grid-cell {
+            background-color: #e5e7eb; /* Slightly lighter gray for cells */
+            border: 1px solid #d1d5db; /* Border between cells */
+        }
+        .snake-segment {
+            background-color: #4b5563; /* Dark gray for snake body */
+            border-radius: 0.25rem; /* Small rounded corners for segments */
+        }
+        .food {
+            background-color: #ef4444; /* Red for food */
+            border-radius: 50%; /* Circle shape for food */
+        }
+        .player-head {
+            background-color: #10b981; /* Green for player's head */
+            border-radius: 50%;
+        }
+        .opponent-head {
+            background-color: #3b82f6; /* Blue for opponent's head */
+            border-radius: 50%;
+        }
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main container for the game -->
+    <div class="flex flex-col items-center gap-6 p-6 bg-white rounded-xl shadow-lg w-full max-w-4xl">
+        <h1 class="text-3xl font-bold text-gray-800">Multiplayer Snake</h1>
+        <div class="flex flex-col sm:flex-row gap-4 w-full">
+            <div class="flex-1">
+                <p class="text-lg text-gray-600 mb-2">Your ID: <span id="userIdDisplay" class="font-mono bg-gray-200 px-2 py-1 rounded">Loading...</span></p>
+                <div id="game-info" class="flex items-center justify-between mb-2">
+                    <span id="player-score" class="text-xl font-bold text-green-600">Score: 0</span>
+                    <span id="opponent-score" class="text-xl font-bold text-blue-600">Opponent: 0</span>
+                </div>
+                <div id="game-grid" class="snake-grid w-full aspect-square"></div>
+            </div>
+
+            <!-- Sidebar for controls and opponent ID input -->
+            <div class="flex flex-col gap-4 p-4 bg-gray-50 rounded-lg shadow-inner">
+                <p class="text-gray-600">Enter opponent's ID to join their game:</p>
+                <input type="text" id="opponentIdInput" class="p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Opponent ID">
+                <button id="join-game-btn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">Join Game</button>
+                <button id="restart-game-btn" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Restart Game</button>
+                <button id="create-game-btn" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">Create Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message box for game status updates -->
+    <div id="message-box" class="message-box">
+        <p id="message-text" class="text-xl font-bold text-gray-800"></p>
+        <button id="close-message-btn" class="mt-4 bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">Close</button>
+    </div>
+
+    <script type="module">
+        // Import Firebase functions from CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, collection, query, where, getDocs, runTransaction } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by the environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId;
+        let gameData = {}; // Local state to mirror Firestore
+        let isAuthReady = false;
+
+        // Game constants
+        const GRID_SIZE = 20;
+        const CELL_SIZE = 20;
+        const MOVE_INTERVAL = 150; // milliseconds
+
+        // Game state
+        let players = {};
+        let gameId = null;
+        let moveTimer = null;
+        let isGameOver = false;
+
+        // DOM elements
+        const gameGridEl = document.getElementById('game-grid');
+        const userIdDisplayEl = document.getElementById('userIdDisplay');
+        const opponentIdInputEl = document.getElementById('opponentIdInput');
+        const joinGameBtn = document.getElementById('join-game-btn');
+        const restartGameBtn = document.getElementById('restart-game-btn');
+        const createGameBtn = document.getElementById('create-game-btn');
+        const playerOneScoreEl = document.getElementById('player-score');
+        const playerTwoScoreEl = document.getElementById('opponent-score');
+        const messageBoxEl = document.getElementById('message-box');
+        const messageTextEl = document.getElementById('message-text');
+        const closeMessageBtn = document.getElementById('close-message-btn');
+
+        // --- Utility Functions ---
+
+        /**
+         * Shows a message box with the given text.
+         * @param {string} text - The message to display.
+         */
+        const showMessage = (text) => {
+            messageTextEl.textContent = text;
+            messageBoxEl.style.display = 'block';
+        };
+
+        /** Hides the message box. */
+        const hideMessage = () => {
+            messageBoxEl.style.display = 'none';
+        };
+
+        /**
+         * Converts x, y coordinates to a 1D index.
+         * @param {number} x
+         * @param {number} y
+         * @returns {number}
+         */
+        const coordsToIndex = (x, y) => y * GRID_SIZE + x;
+
+        /**
+         * Converts a 1D index to x, y coordinates.
+         * @param {number} index
+         * @returns {{x: number, y: number}}
+         */
+        const indexToCoords = (index) => ({ x: index % GRID_SIZE, y: Math.floor(index / GRID_SIZE) });
+
+        /** Generates a random position within the grid. */
+        const getRandomPosition = () => {
+            return {
+                x: Math.floor(Math.random() * GRID_SIZE),
+                y: Math.floor(Math.random() * GRID_SIZE),
+            };
+        };
+
+        // --- Game Logic Functions ---
+
+        /**
+         * Initializes a new game state.
+         * @returns {object} The initial game state.
+         */
+        const initializeGameState = () => {
+            const player1Head = getRandomPosition();
+            let player2Head = getRandomPosition();
+            while (player2Head.x === player1Head.x && player2Head.y === player1Head.y) {
+                player2Head = getRandomPosition();
+            }
+
+            return {
+                players: {
+                    player1: {
+                        snake: [{ ...player1Head }],
+                        direction: 'right',
+                        score: 0,
+                        id: userId,
+                    },
+                    player2: {
+                        snake: [{ ...player2Head }],
+                        direction: 'left',
+                        score: 0,
+                        id: null, // This will be updated when a player joins
+                    },
+                },
+                food: getRandomPosition(),
+                gameStatus: 'waiting',
+                updatedAt: Date.now(),
+            };
+        };
+
+        /**
+         * Creates the game grid HTML elements.
+         */
+        const createGrid = () => {
+            gameGridEl.innerHTML = '';
+            gameGridEl.style.gridTemplateColumns = `repeat(${GRID_SIZE}, minmax(0, 1fr))`;
+            for (let i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                gameGridEl.appendChild(cell);
+            }
+        };
+
+        /**
+         * Renders the current game state to the grid.
+         */
+        const render = () => {
+            // Clear the grid
+            document.querySelectorAll('.snake-segment, .player-head, .opponent-head, .food').forEach(el => {
+                el.className = 'grid-cell';
+            });
+
+            // If game data is not loaded, return
+            if (!gameData.players) return;
+
+            const myPlayerKey = players[userId];
+            const opponentPlayerKey = myPlayerKey === 'player1' ? 'player2' : 'player1';
+
+            // Render my snake
+            const mySnake = gameData.players[myPlayerKey].snake;
+            mySnake.forEach((segment, index) => {
+                const cell = gameGridEl.children[coordsToIndex(segment.x, segment.y)];
+                if (cell) {
+                    if (index === 0) {
+                        cell.className = 'grid-cell player-head';
+                    } else {
+                        cell.className = 'grid-cell snake-segment';
+                    }
+                }
+            });
+
+            // Render opponent's snake
+            const opponentSnake = gameData.players[opponentPlayerKey].snake;
+            if (opponentSnake && opponentSnake.length > 0) {
+                opponentSnake.forEach((segment, index) => {
+                    const cell = gameGridEl.children[coordsToIndex(segment.x, segment.y)];
+                    if (cell) {
+                        if (index === 0) {
+                            cell.className = 'grid-cell opponent-head';
+                        } else {
+                            cell.className = 'grid-cell snake-segment';
+                        }
+                    }
+                });
+            }
+
+            // Render food
+            if (gameData.food) {
+                const foodCell = gameGridEl.children[coordsToIndex(gameData.food.x, gameData.food.y)];
+                if (foodCell) {
+                    foodCell.className = 'grid-cell food';
+                }
+            }
+
+            // Update scores
+            playerOneScoreEl.textContent = `Score: ${gameData.players[myPlayerKey].score}`;
+            playerTwoScoreEl.textContent = `Opponent: ${gameData.players[opponentPlayerKey].score}`;
+        };
+
+        /**
+         * Gets the current player's snake data based on their UID.
+         * @returns {object} The player's data object.
+         */
+        const getMyPlayerData = () => {
+            if (!players[userId]) return null;
+            return gameData.players[players[userId]];
+        };
+
+        /** Checks if the current user is player one. */
+        const getIsPlayerOne = () => players[userId] === 'player1';
+
+        /**
+         * Handles keyboard input for snake movement.
+         * @param {KeyboardEvent} event
+         */
+        const handleKeyPress = (event) => {
+            if (isGameOver || !gameId) return;
+            const myPlayer = getMyPlayerData();
+            if (!myPlayer) return;
+
+            let newDirection = myPlayer.direction;
+            const key = event.key;
+
+            switch (key) {
+                case 'ArrowUp':
+                case 'w':
+                    if (myPlayer.direction !== 'down') newDirection = 'up';
+                    break;
+                case 'ArrowDown':
+                case 's':
+                    if (myPlayer.direction !== 'up') newDirection = 'down';
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                    if (myPlayer.direction !== 'right') newDirection = 'left';
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                    if (myPlayer.direction !== 'left') newDirection = 'right';
+                    break;
+            }
+
+            // Update direction in Firestore
+            if (newDirection !== myPlayer.direction) {
+                updatePlayerDirection(newDirection);
+            }
+        };
+
+        /**
+         * Moves the snake and handles collisions.
+         * This function runs locally and is triggered by the game loop.
+         */
+        const moveSnake = async (playerKey) => {
+            const player = gameData.players[playerKey];
+            if (!player) return;
+
+            const newHead = { ...player.snake[0] };
+            switch (player.direction) {
+                case 'up':
+                    newHead.y--;
+                    break;
+                case 'down':
+                    newHead.y++;
+                    break;
+                case 'left':
+                    newHead.x--;
+                    break;
+                case 'right':
+                    newHead.x++;
+                    break;
+            }
+
+            // Check for wall collision
+            if (newHead.x < 0 || newHead.x >= GRID_SIZE || newHead.y < 0 || newHead.y >= GRID_SIZE) {
+                gameOver(playerKey === 'player1' ? 'Player 2' : 'Player 1');
+                return;
+            }
+
+            // Check for self collision
+            if (player.snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
+                gameOver(playerKey === 'player1' ? 'Player 2' : 'Player 1');
+                return;
+            }
+
+            // Check for opponent collision
+            const opponentKey = playerKey === 'player1' ? 'player2' : 'player1';
+            const opponent = gameData.players[opponentKey];
+            if (opponent.snake && opponent.snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
+                gameOver(playerKey === 'player1' ? 'Player 2' : 'Player 1');
+                return;
+            }
+
+            // Check for food collision
+            const foodCollision = newHead.x === gameData.food.x && newHead.y === gameData.food.y;
+            if (foodCollision) {
+                player.score++;
+                gameData.food = getRandomPosition();
+            } else {
+                player.snake.pop(); // Remove tail if no food is eaten
+            }
+
+            player.snake.unshift(newHead);
+
+            // Update Firestore with the new state
+            try {
+                await setDoc(doc(db, "artifacts", appId, "public", "data", "games", gameId), {
+                    players: gameData.players,
+                    food: gameData.food,
+                    updatedAt: Date.now(),
+                });
+            } catch (e) {
+                console.error("Error updating game state:", e);
+                // Handle the error gracefully, maybe by stopping the game loop
+            }
+        };
+
+        /**
+         * The main game loop. Runs every MOVE_INTERVAL.
+         * Only Player 1 is responsible for updating the game state to Firestore.
+         */
+        const gameLoop = () => {
+            if (isGameOver || !gameData.gameStatus) {
+                if (moveTimer) clearTimeout(moveTimer);
+                moveTimer = null;
+                return;
+            }
+
+            if (getIsPlayerOne()) {
+                moveSnake('player1');
+                if (gameData.players.player2.id) {
+                    moveSnake('player2');
+                }
+            }
+
+            // Continue the loop
+            moveTimer = setTimeout(gameLoop, MOVE_INTERVAL);
+        };
+
+        /**
+         * Ends the game and displays a message.
+         * @param {string} winnerName
+         */
+        const gameOver = async (winnerName) => {
+            if (isGameOver) return; // Prevent multiple calls
+            isGameOver = true;
+            if (moveTimer) clearTimeout(moveTimer);
+            try {
+                await setDoc(doc(db, "artifacts", appId, "public", "data", "games", gameId), {
+                    gameStatus: 'game_over',
+                    winner: winnerName,
+                    updatedAt: Date.now(),
+                }, { merge: true });
+            } catch (e) {
+                console.error("Error setting game over state:", e);
+            }
+        };
+
+        // --- Firebase Interaction Functions ---
+
+        /**
+         * Updates the player's direction in Firestore.
+         * @param {string} newDirection
+         */
+        const updatePlayerDirection = async (newDirection) => {
+            if (gameId && userId) {
+                const playerKey = players[userId];
+                if (playerKey) {
+                    const gameRef = doc(db, "artifacts", appId, "public", "data", "games", gameId);
+                    try {
+                        await setDoc(gameRef, {
+                            players: {
+                                [playerKey]: {
+                                    direction: newDirection
+                                }
+                            }
+                        }, { merge: true });
+                    } catch (e) {
+                        console.error("Error updating player direction:", e);
+                    }
+                }
+            }
+        };
+
+        /**
+         * Listens for real-time changes to the game data in Firestore.
+         */
+        const listenForGameUpdates = () => {
+            if (!gameId) return;
+
+            const gameRef = doc(db, "artifacts", appId, "public", "data", "games", gameId);
+            onSnapshot(gameRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const newGameData = docSnap.data();
+                    
+                    // Reset game over flag if a new game starts
+                    if (newGameData.gameStatus !== 'game_over' && isGameOver) {
+                        isGameOver = false;
+                    }
+
+                    if (newGameData.gameStatus === 'game_over' && !isGameOver) {
+                        isGameOver = true;
+                        showMessage(`Game Over! Winner: ${newGameData.winner}`);
+                        if (moveTimer) clearTimeout(moveTimer);
+                        return;
+                    }
+
+                    gameData = newGameData;
+                    render();
+
+                    // Start game loop if both players are present and it's not started
+                    if (gameData.gameStatus === 'waiting' && gameData.players.player1 && gameData.players.player2.id) {
+                        gameData.gameStatus = 'started';
+                        // Only Player 1 updates the status
+                        if (getIsPlayerOne()) {
+                            try {
+                                setDoc(gameRef, { gameStatus: 'started' }, { merge: true });
+                            } catch (e) {
+                                console.error("Error starting game:", e);
+                            }
+                        }
+                    }
+
+                    // Start the loop when status is started, if it's not running
+                    if (gameData.gameStatus === 'started' && !moveTimer) {
+                         gameLoop();
+                    }
+                } else {
+                    showMessage("Game does not exist. Please create a new game or join another.");
+                }
+            });
+        };
+
+        /**
+         * Creates a new game and adds the current user as Player 1.
+         */
+        const createGame = async () => {
+            if (!isAuthReady) {
+                showMessage("Authentication is not ready. Please wait a moment.");
+                return;
+            }
+            try {
+                const newGameId = userId;
+                const gameDocRef = doc(db, "artifacts", appId, "public", "data", "games", newGameId);
+                
+                await setDoc(gameDocRef, initializeGameState());
+
+                gameId = newGameId;
+                players[userId] = 'player1';
+                userIdDisplayEl.textContent = userId;
+                showMessage(`Game created! Share this ID with a friend: ${userId}`);
+                listenForGameUpdates();
+            } catch (e) {
+                console.error("Error creating game:", e);
+                showMessage("Failed to create game. Please try again.");
+            }
+        };
+
+        /**
+         * Joins an existing game as Player 2.
+         * @param {string} targetGameId
+         */
+        const joinGame = async () => {
+            if (!isAuthReady) {
+                showMessage("Authentication is not ready. Please wait a moment.");
+                return;
+            }
+            const targetGameId = opponentIdInputEl.value.trim();
+            if (!targetGameId) {
+                showMessage("Please enter a valid game ID.");
+                return;
+            }
+
+            try {
+                const gameDocRef = doc(db, "artifacts", appId, "public", "data", "games", targetGameId);
+
+                await runTransaction(db, async (transaction) => {
+                    const gameDoc = await transaction.get(gameDocRef);
+
+                    if (!gameDoc.exists()) {
+                        throw "Game not found.";
+                    }
+
+                    const existingPlayers = gameDoc.data().players;
+                    if (existingPlayers.player2.id) {
+                        throw "Game is full.";
+                    }
+
+                    players[userId] = 'player2';
+                    gameId = targetGameId;
+                    userIdDisplayEl.textContent = userId;
+
+                    transaction.update(gameDocRef, {
+                        'players.player2.id': userId
+                    });
+                });
+                showMessage(`Joined game with ID: ${targetGameId}`);
+                listenForGameUpdates();
+            } catch (e) {
+                console.error("Error joining game:", e);
+                showMessage(`Failed to join game: ${e}`);
+            }
+        };
+
+        // --- Event Listeners and Initial Setup ---
+
+        // Initialize Firebase and set up auth listener
+        const initFirebase = () => {
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        userIdDisplayEl.textContent = userId;
+                        isAuthReady = true;
+                        console.log("Firebase authenticated. User ID:", userId);
+                    } else {
+                        console.log("No user found, signing in anonymously...");
+                        await signInAnonymously(auth);
+                    }
+                });
+
+            } catch (e) {
+                console.error("Firebase initialization failed:", e);
+                showMessage("Failed to initialize Firebase. Please try again.");
+            }
+        };
+
+        createGameBtn.addEventListener('click', createGame);
+        joinGameBtn.addEventListener('click', joinGame);
+        restartGameBtn.addEventListener('click', async () => {
+            if (gameId && isAuthReady) {
+                try {
+                    await setDoc(doc(db, "artifacts", appId, "public", "data", "games", gameId), initializeGameState());
+                    isGameOver = false;
+                    if (moveTimer) clearTimeout(moveTimer);
+                    gameLoop();
+                } catch (e) {
+                    console.error("Error restarting game:", e);
+                    showMessage("Failed to restart game. Please try again.");
+                }
+            } else {
+                showMessage("No game to restart. Create a new one!");
+            }
+        });
+
+        document.addEventListener('keydown', handleKeyPress);
+        closeMessageBtn.addEventListener('click', hideMessage);
+
+        // Initial setup on page load
+        window.onload = () => {
+            createGrid();
+            initFirebase();
+        };
+
+</script>
+<!-- Removed duplicate Firebase initialization script to prevent redeclaration errors -->
+</body>
+</html>

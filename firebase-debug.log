@@ -1,0 +1,228 @@
+[debug] [2025-08-20T15:13:26.231Z] ----------------------------------------------------------------------
+[debug] [2025-08-20T15:13:26.241Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-08-20T15:13:26.242Z] CLI Version:   14.12.1
+[debug] [2025-08-20T15:13:26.242Z] Platform:      win32
+[debug] [2025-08-20T15:13:26.243Z] Node Version:  v22.15.0
+[debug] [2025-08-20T15:13:26.244Z] Time:          Wed Aug 20 2025 21:13:26 GMT+0600 (Bangladesh Standard Time)
+[debug] [2025-08-20T15:13:26.244Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-20T15:13:26.252Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-08-20T15:13:26.346Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-20T15:13:26.347Z] > authorizing via signed-in user (raihanchowdhury20004@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Grand Theft Auto V\Desktop\testing\Multiplayer Snake Game
+
+[debug] [2025-08-20T15:13:27.110Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-08-20T15:13:27.111Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2025-08-20T15:18:11.578Z] Checked if tokens are valid: false, expires at: 1750694300772
+[debug] [2025-08-20T15:18:11.579Z] Checked if tokens are valid: false, expires at: 1750694300772
+[debug] [2025-08-20T15:18:11.579Z] > refreshing access token with scopes: []
+[debug] [2025-08-20T15:18:11.582Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-08-20T15:18:11.582Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-20T15:18:11.910Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-08-20T15:18:11.911Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-20T15:18:11.943Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2025-08-20T15:18:11.944Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"multiplayer-snake-game"}
+[debug] [2025-08-20T15:18:12.926Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2025-08-20T15:18:12.927Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_UNAVAILABLE","suggestedProjectId":"multiplayer-snake-game-7f220"}
+[debug] [2025-08-20T15:20:38.421Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:20:38.422Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:20:38.423Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2025-08-20T15:20:38.423Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"multiplayer-snake-game-cb3f5"}
+[debug] [2025-08-20T15:20:39.231Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2025-08-20T15:20:39.232Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_UNAVAILABLE","suggestedProjectId":"multiplayer-snake-game-c-64c7a"}
+[debug] [2025-08-20T15:20:55.264Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:20:55.265Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:20:55.267Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2025-08-20T15:20:55.267Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"multiplayer-snake-game-c-64c7a"}
+[debug] [2025-08-20T15:20:55.817Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2025-08-20T15:20:55.818Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"multiplayer-snake-game-c-64c7a"}
+[debug] [2025-08-20T15:21:57.609Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:21:57.609Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:21:57.609Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2025-08-20T15:21:57.609Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"multiplayer-snake-game-c-64c7a","name":"Multiplayer Snake Game"}
+[debug] [2025-08-20T15:21:59.720Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2025-08-20T15:21:59.721Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.8756891599249456864"}
+[debug] [2025-08-20T15:21:59.727Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:21:59.728Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:21:59.734Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8756891599249456864 [none]
+[debug] [2025-08-20T15:22:01.243Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8756891599249456864 200
+[debug] [2025-08-20T15:22:01.243Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8756891599249456864 {"name":"operations/create_project.global.8756891599249456864","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","gettable":true,"ready":true},"done":true,"response":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.Project","projectNumber":"368150464456","projectId":"multiplayer-snake-game-c-64c7a","lifecycleState":"ACTIVE","name":"Multiplayer Snake Game","createTime":"2025-08-20T15:21:56.977735Z"}}
+[debug] [2025-08-20T15:22:01.251Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:01.251Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:01.252Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1beta1/projects/multiplayer-snake-game-c-64c7a:addFirebase [none]
+[debug] [2025-08-20T15:22:04.826Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1beta1/projects/multiplayer-snake-game-c-64c7a:addFirebase 200
+[debug] [2025-08-20T15:22:04.827Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1beta1/projects/multiplayer-snake-game-c-64c7a:addFirebase {"name":"operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx"}
+[debug] [2025-08-20T15:22:04.827Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:04.828Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:04.828Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx [none]
+[debug] [2025-08-20T15:22:09.118Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx 200
+[debug] [2025-08-20T15:22:09.119Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx {"name":"operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx"}
+[debug] [2025-08-20T15:22:09.624Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2025-08-20T15:22:09.625Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:09.626Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:09.626Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx [none]
+[debug] [2025-08-20T15:22:10.556Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx 200
+[debug] [2025-08-20T15:22:10.556Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx {"name":"operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx"}
+[debug] [2025-08-20T15:22:11.557Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2025-08-20T15:22:11.558Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:11.558Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:11.558Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx [none]
+[debug] [2025-08-20T15:22:12.669Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx 200
+[debug] [2025-08-20T15:22:12.669Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx {"name":"operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx"}
+[debug] [2025-08-20T15:22:14.673Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2025-08-20T15:22:14.675Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:14.676Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:14.677Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx [none]
+[debug] [2025-08-20T15:22:15.861Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx 200
+[debug] [2025-08-20T15:22:15.861Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx {"name":"operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx"}
+[debug] [2025-08-20T15:22:19.864Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2025-08-20T15:22:19.869Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:19.871Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:19.871Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx [none]
+[debug] [2025-08-20T15:22:20.947Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx 200
+[debug] [2025-08-20T15:22:20.948Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx {"name":"operations/workflows/OTVkMmEyZjktNmEyZC00NDRiLTk1ZGYtYTY0M2NiZDFmODAx","done":true,"response":{"@type":"type.googleapis.com/google.firebase.service.v1beta1.FirebaseProject","projectId":"multiplayer-snake-game-c-64c7a","projectNumber":"368150464456","displayName":"Multiplayer Snake Game","name":"projects/multiplayer-snake-game-c-64c7a","resources":{"hostingSite":"multiplayer-snake-game-c-64c7a"}}}
+[info] 
+[info] === Your Firebase project is ready! ===
+[info] 
+[info] Project information:
+[info]    - Project ID: multiplayer-snake-game-c-64c7a
+[info]    - Project Name: Multiplayer Snake Game
+[info] 
+[info] Firebase console is available at
+[info] https://console.firebase.google.com/project/multiplayer-snake-game-c-64c7a/overview
+[info] i  Using project multiplayer-snake-game-c-64c7a (Multiplayer Snake Game) 
+[info] 
+=== Firestore Setup
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[debug] [2025-08-20T15:22:21.170Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:21.171Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:21.172Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com [none]
+[debug] [2025-08-20T15:22:21.172Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com x-goog-quota-user=projects/multiplayer-snake-game-c-64c7a
+[debug] [2025-08-20T15:22:23.671Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com 200
+[debug] [2025-08-20T15:22:23.673Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com [omitted]
+[warn] !  firestore: missing required API firestore.googleapis.com. Enabling now... 
+[debug] [2025-08-20T15:22:23.676Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:23.677Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:23.677Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com:enable [none]
+[debug] [2025-08-20T15:22:23.678Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com:enable x-goog-quota-user=projects/multiplayer-snake-game-c-64c7a
+[debug] [2025-08-20T15:22:24.580Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com:enable 200
+[debug] [2025-08-20T15:22:24.581Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/services/firestore.googleapis.com:enable [omitted]
+[debug] [2025-08-20T15:22:34.620Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:34.621Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:34.622Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases [none]
+[debug] [2025-08-20T15:22:36.391Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases 200
+[debug] [2025-08-20T15:22:36.391Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases {}
+[debug] [2025-08-20T15:22:36.392Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:36.392Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:22:36.392Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/locations [none]
+[debug] [2025-08-20T15:22:38.784Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/locations 200
+[debug] [2025-08-20T15:22:38.785Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/locations {"locations":[{"name":"projects/multiplayer-snake-game-c-64c7a/locations/eur3","labels":{"appengine.googleapis.com/geo":"europe-west","cloud.googleapis.com/location":"eur3","cloud.googleapis.com/geo":"eur3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"eur3","displayName":"Europe"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/nam5","labels":{"appengine.googleapis.com/geo":"us-central","cloud.googleapis.com/location":"nam5","cloud.googleapis.com/geo":"nam5"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"nam5","displayName":"United States"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/nam7","labels":{"cloud.googleapis.com/location":"nam7","cloud.googleapis.com/geo":"nam7"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"nam7","displayName":"United States"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/africa-south1","labels":{"cloud.googleapis.com/location":"africa-south1","cloud.googleapis.com/region":"africa-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"africa-south1","displayName":"Johannesburg"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-east1","labels":{"appengine.googleapis.com/region":"asia-east1","cloud.googleapis.com/location":"asia-east1","cloud.googleapis.com/region":"asia-east1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-east1","displayName":"Taiwan"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-east2","labels":{"appengine.googleapis.com/region":"asia-east2","cloud.googleapis.com/location":"asia-east2","cloud.googleapis.com/region":"asia-east2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-east2","displayName":"Hong Kong"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-northeast1","labels":{"appengine.googleapis.com/region":"asia-northeast1","cloud.googleapis.com/location":"asia-northeast1","cloud.googleapis.com/region":"asia-northeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-northeast1","displayName":"Tokyo"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-northeast2","labels":{"appengine.googleapis.com/region":"asia-northeast2","cloud.googleapis.com/location":"asia-northeast2","cloud.googleapis.com/region":"asia-northeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-northeast2","displayName":"Osaka"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-northeast3","labels":{"appengine.googleapis.com/region":"asia-northeast3","cloud.googleapis.com/location":"asia-northeast3","cloud.googleapis.com/region":"asia-northeast3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-northeast3","displayName":"Seoul"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-south1","labels":{"appengine.googleapis.com/region":"asia-south1","cloud.googleapis.com/location":"asia-south1","cloud.googleapis.com/region":"asia-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-south1","displayName":"Mumbai"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-south2","labels":{"cloud.googleapis.com/location":"asia-south2","cloud.googleapis.com/region":"asia-south2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-south2","displayName":"Delhi"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-southeast1","labels":{"appengine.googleapis.com/region":"asia-southeast1","cloud.googleapis.com/location":"asia-southeast1","cloud.googleapis.com/region":"asia-southeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-southeast1","displayName":"Singapore"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/asia-southeast2","labels":{"appengine.googleapis.com/region":"asia-southeast2","cloud.googleapis.com/location":"asia-southeast2","cloud.googleapis.com/region":"asia-southeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-southeast2","displayName":"Jakarta"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/australia-southeast1","labels":{"appengine.googleapis.com/region":"australia-southeast1","cloud.googleapis.com/location":"australia-southeast1","cloud.googleapis.com/region":"australia-southeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"australia-southeast1","displayName":"Sydney"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/australia-southeast2","labels":{"cloud.googleapis.com/location":"australia-southeast2","cloud.googleapis.com/region":"australia-southeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"australia-southeast2","displayName":"Melbourne"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-central2","labels":{"appengine.googleapis.com/region":"europe-central2","cloud.googleapis.com/location":"europe-central2","cloud.googleapis.com/region":"europe-central2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-central2","displayName":"Warsaw"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-north1","labels":{"cloud.googleapis.com/location":"europe-north1","cloud.googleapis.com/region":"europe-north1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-north1","displayName":"Finland"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-north2","labels":{"cloud.googleapis.com/location":"europe-north2","cloud.googleapis.com/region":"europe-north2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-north2","displayName":"Stockholm"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-southwest1","labels":{"cloud.googleapis.com/location":"europe-southwest1","cloud.googleapis.com/region":"europe-southwest1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-southwest1","displayName":"Madrid"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west1","labels":{"cloud.googleapis.com/location":"europe-west1","cloud.googleapis.com/region":"europe-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west1","displayName":"Belgium"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west10","labels":{"cloud.googleapis.com/location":"europe-west10","cloud.googleapis.com/region":"europe-west10"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west10","displayName":"Berlin"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west12","labels":{"cloud.googleapis.com/location":"europe-west12","cloud.googleapis.com/region":"europe-west12"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west12","displayName":"Turin"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west2","labels":{"appengine.googleapis.com/region":"europe-west2","cloud.googleapis.com/location":"europe-west2","cloud.googleapis.com/region":"europe-west2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west2","displayName":"London"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west3","labels":{"appengine.googleapis.com/region":"europe-west3","cloud.googleapis.com/location":"europe-west3","cloud.googleapis.com/region":"europe-west3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west3","displayName":"Frankfurt"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west4","labels":{"cloud.googleapis.com/location":"europe-west4","cloud.googleapis.com/region":"europe-west4"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west4","displayName":"Netherlands"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west6","labels":{"appengine.googleapis.com/region":"europe-west6","cloud.googleapis.com/location":"europe-west6","cloud.googleapis.com/region":"europe-west6"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west6","displayName":"Zurich"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west8","labels":{"cloud.googleapis.com/location":"europe-west8","cloud.googleapis.com/region":"europe-west8"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west8","displayName":"Milan"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/europe-west9","labels":{"cloud.googleapis.com/location":"europe-west9","cloud.googleapis.com/region":"europe-west9"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west9","displayName":"Paris"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/me-central1","labels":{"cloud.googleapis.com/location":"me-central1","cloud.googleapis.com/region":"me-central1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"me-central1","displayName":"Doha"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/me-central2","labels":{"cloud.googleapis.com/location":"me-central2","cloud.googleapis.com/region":"me-central2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"me-central2","displayName":"Dammam"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/me-west1","labels":{"cloud.googleapis.com/location":"me-west1","cloud.googleapis.com/region":"me-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"me-west1","displayName":"Tel Aviv"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/northamerica-northeast1","labels":{"appengine.googleapis.com/region":"northamerica-northeast1","cloud.googleapis.com/location":"northamerica-northeast1","cloud.googleapis.com/region":"northamerica-northeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"northamerica-northeast1","displayName":"Montréal"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/northamerica-northeast2","labels":{"cloud.googleapis.com/location":"northamerica-northeast2","cloud.googleapis.com/region":"northamerica-northeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"northamerica-northeast2","displayName":"Toronto"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/northamerica-south1","labels":{"cloud.googleapis.com/location":"northamerica-south1","cloud.googleapis.com/region":"northamerica-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"northamerica-south1","displayName":"Mexico"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/southamerica-east1","labels":{"appengine.googleapis.com/region":"southamerica-east1","cloud.googleapis.com/location":"southamerica-east1","cloud.googleapis.com/region":"southamerica-east1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"southamerica-east1","displayName":"São Paulo"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/southamerica-west1","labels":{"cloud.googleapis.com/location":"southamerica-west1","cloud.googleapis.com/region":"southamerica-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"southamerica-west1","displayName":"Santiago"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-central1","labels":{"cloud.googleapis.com/location":"us-central1","cloud.googleapis.com/region":"us-central1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-central1","displayName":"Iowa"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-east1","labels":{"appengine.googleapis.com/region":"us-east1","cloud.googleapis.com/location":"us-east1","cloud.googleapis.com/region":"us-east1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-east1","displayName":"South Carolina"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-east4","labels":{"appengine.googleapis.com/region":"us-east4","cloud.googleapis.com/location":"us-east4","cloud.googleapis.com/region":"us-east4"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-east4","displayName":"Northern Virginia"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-east5","labels":{"cloud.googleapis.com/location":"us-east5","cloud.googleapis.com/region":"us-east5"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-east5","displayName":"Columbus"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-south1","labels":{"cloud.googleapis.com/location":"us-south1","cloud.googleapis.com/region":"us-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-south1","displayName":"Dallas"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-west1","labels":{"appengine.googleapis.com/region":"us-west1","cloud.googleapis.com/location":"us-west1","cloud.googleapis.com/region":"us-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west1","displayName":"Oregon"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-west2","labels":{"appengine.googleapis.com/region":"us-west2","cloud.googleapis.com/location":"us-west2","cloud.googleapis.com/region":"us-west2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west2","displayName":"Los Angeles"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-west3","labels":{"appengine.googleapis.com/region":"us-west3","cloud.googleapis.com/location":"us-west3","cloud.googleapis.com/region":"us-west3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west3","displayName":"Salt Lake City"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-west4","labels":{"appengine.googleapis.com/region":"us-west4","cloud.googleapis.com/location":"us-west4","cloud.googleapis.com/region":"us-west4"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west4","displayName":"Las Vegas"},{"name":"projects/multiplayer-snake-game-c-64c7a/locations/us-west8","labels":{"cloud.googleapis.com/location":"us-west8","cloud.googleapis.com/region":"us-west8"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west8","displayName":"Phoenix"}]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2025-08-20T15:26:15.691Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:26:15.691Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:26:15.691Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/releases pageSize=10&pageToken=
+[debug] [2025-08-20T15:26:17.345Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/releases 200
+[debug] [2025-08-20T15:26:17.345Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/releases {}
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2025-08-20T15:27:06.095Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:27:06.096Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:27:06.096Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:27:06.096Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:27:06.096Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2025-08-20T15:27:06.099Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2025-08-20T15:27:06.607Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases/(default)/collectionGroups/-/indexes 404
+[debug] [2025-08-20T15:27:06.608Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases/(default)/collectionGroups/-/indexes {"error":{"code":404,"message":"Project 'multiplayer-snake-game-c-64c7a' or database '(default)' does not exist.","status":"NOT_FOUND"}}
+[info] +  Wrote firestore.rules 
+[info] +  Wrote firestore.indexes.json 
+[debug] [2025-08-20T15:27:06.655Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 404
+[debug] [2025-08-20T15:27:06.656Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/multiplayer-snake-game-c-64c7a/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"error":{"code":404,"message":"Project 'multiplayer-snake-game-c-64c7a' or database '(default)' does not exist.","status":"NOT_FOUND"}}
+[info] 
+=== Hosting Setup
+[debug] [2025-08-20T15:27:06.849Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:27:06.850Z] Checked if tokens are valid: true, expires at: 1755706690911
+[debug] [2025-08-20T15:27:06.850Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/multiplayer-snake-game-c-64c7a [none]
+[debug] [2025-08-20T15:27:07.449Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/multiplayer-snake-game-c-64c7a 200
+[debug] [2025-08-20T15:27:07.450Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/multiplayer-snake-game-c-64c7a {"projectId":"multiplayer-snake-game-c-64c7a","projectNumber":"368150464456","displayName":"Multiplayer Snake Game","name":"projects/multiplayer-snake-game-c-64c7a","resources":{"hostingSite":"multiplayer-snake-game-c-64c7a"},"state":"ACTIVE","etag":"1_e0e63189-c262-4ab1-9f00-d8a1dd4cc3ee"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2025-08-20T15:28:16.233Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2025-08-20T15:28:16.429Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2025-08-20T15:28:16.429Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"12.1.0","browserURL":"https://www.gstatic.com/firebasejs/12.1.0/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/12.1.0/firebase.tgz"},"live":{"version":"12.1","browserURL":"https://www.gstatic.com/firebasejs/live/12.1/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/12.1/firebase.tgz"},"components":{"ai":"https://www.gstatic.com/firebasejs/12.1.0/firebase-ai.js","analytics":"https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/12.1.0/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth/cordova.js","auth/web-extension":"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth/web-extension.js","functions":"https://www.gstatic.com/firebasejs/12.1.0/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/12.1.0/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/12.1.0/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/12.1.0/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/12.1.0/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/12.1.0/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js","data-connect":"https://www.gstatic.com/firebasejs/12.1.0/firebase-data-connect.js","firestore.memory":"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.memory.js"}}
+[info] +  Wrote public/index.html 
+[info] 
+[info] i  Didn't detect a .git folder. Assuming D:\Grand Theft Auto V\Desktop\testing\Multiplayer Snake Game is the project root. 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=596798859&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2025-08-20T15:30:19.203Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2025-08-20T15:30:19.204Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2025-08-20T15:30:19.780Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2025-08-20T15:30:19.781Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2025-08-20T15:30:19.800Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2025-08-20T15:30:20.655Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2025-08-20T15:30:20.656Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"raihan243026","id":183230278,"node_id":"U_kgDOCuvfRg","avatar_url":"https://avatars.githubusercontent.com/u/183230278?v=4","gravatar_id":"","url":"https://api.github.com/users/raihan243026","html_url":"https://github.com/raihan243026","followers_url":"https://api.github.com/users/raihan243026/followers","following_url":"https://api.github.com/users/raihan243026/following{/other_user}","gists_url":"https://api.github.com/users/raihan243026/gists{/gist_id}","starred_url":"https://api.github.com/users/raihan243026/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/raihan243026/subscriptions","organizations_url":"https://api.github.com/users/raihan243026/orgs","repos_url":"https://api.github.com/users/raihan243026/repos","events_url":"https://api.github.com/users/raihan243026/events{/privacy}","received_events_url":"https://api.github.com/users/raihan243026/received_events","type":"User","user_view_type":"private","site_admin":false,"name":null,"company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"twitter_username":null,"notification_email":null,"public_repos":78,"public_gists":0,"followers":0,"following":0,"created_at":"2024-09-28T17:23:06Z","updated_at":"2025-08-18T18:50:12Z","private_gists":0,"total_private_repos":0,"owned_private_repos":0,"disk_usage":16232,"collaborators":0,"two_factor_authentication":false,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as raihan243026 
+[info] 
+[debug] [2025-08-20T15:31:26.047Z] >>> [apiv2][query] GET https://api.github.com/repos/raihan243026/multiplayer-snake-game/actions/secrets/public-key type=owner
+[debug] [2025-08-20T15:31:26.695Z] <<< [apiv2][status] GET https://api.github.com/repos/raihan243026/multiplayer-snake-game/actions/secrets/public-key 404
+[debug] [2025-08-20T15:31:26.697Z] <<< [apiv2][body] GET https://api.github.com/repos/raihan243026/multiplayer-snake-game/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2025-08-20T15:32:34.923Z] >>> [apiv2][query] GET https://api.github.com/repos//multiplayer-snake-game/actions/secrets/public-key type=owner
+[debug] [2025-08-20T15:32:35.503Z] <<< [apiv2][status] GET https://api.github.com/repos//multiplayer-snake-game/actions/secrets/public-key 404
+[debug] [2025-08-20T15:32:35.504Z] <<< [apiv2][body] GET https://api.github.com/repos//multiplayer-snake-game/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2025-08-20T15:44:33.347Z] >>> [apiv2][query] GET https://api.github.com/repos//multiplayer-snake-game/actions/secrets/public-key type=owner
+[debug] [2025-08-20T15:44:33.950Z] <<< [apiv2][status] GET https://api.github.com/repos//multiplayer-snake-game/actions/secrets/public-key 404
+[debug] [2025-08-20T15:44:33.951Z] <<< [apiv2][body] GET https://api.github.com/repos//multiplayer-snake-game/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
